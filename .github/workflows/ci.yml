@@ -1,21 +1,32 @@
-[cite_start]name: CI  # Назва пайплайну [cite: 29]
+name: CI
 
 on:
   push:
-    [cite_start]branches: [ main ] # Запуск при завантаженні коду [cite: 30]
+    branches: [ "main" ]
   pull_request:
-    [cite_start]branches: [ main ] # Запуск при створенні PR [cite: 30]
+    branches: [ "main" ]
 
 jobs:
   build-and-test:
-    [cite_start]runs-on: ubuntu-latest # Використовуємо Linux [cite: 31]
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        [cite_start]uses: actions/checkout@v4 # Копіюємо код [cite: 33]
+      - name: Checkout код
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
-        [cite_start]run: npm install # Встановлення (якщо у тебе Node.js) [cite: 36]
+      - name: Встановити Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
-      - name: Run tests
-        [cite_start]run: npm test # Запуск тестів [cite: 39]
+      - name: Встановлення залежностей
+        run: npm install
+
+      - name: Збірка
+        run: npm run build
+
+      - name: Тести
+        run: npm test
+
+      - name: Lint
+        run: npm run lint
