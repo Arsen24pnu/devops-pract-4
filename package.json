@@ -1,0 +1,9 @@
+{
+  "name": "ci-project",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo OK",
+    "build": "echo Build OK",
+    "lint": "echo Lint OK"
+  }
+}
